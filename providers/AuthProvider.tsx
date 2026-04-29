@@ -4,11 +4,17 @@ import { useEffect } from "react";
 import { useAuthStore } from "@/lib/store/authStore";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const setUserId = useAuthStore((state) => state.setUserId);
+  const setUser = useAuthStore((state) => state.setUser);
+  const setIsLoading = useAuthStore((state) => state.setIsLoading);
 
   useEffect(() => {
-    setUserId(null);
-  }, [setUserId]);
+    setIsLoading(false);
+    setUser({
+      full_name: "Operator",
+      role: "Staff",
+      subscription_tier: "Free",
+    });
+  }, [setIsLoading, setUser]);
 
   return <>{children}</>;
 }

@@ -1,11 +1,22 @@
 import { create } from "zustand";
 
+type AuthUser = {
+  full_name?: string;
+  avatar_url?: string;
+  role?: string;
+  subscription_tier?: string;
+};
+
 type AuthState = {
-  userId: string | null;
-  setUserId: (userId: string | null) => void;
+  user: AuthUser | null;
+  isLoading: boolean;
+  setUser: (user: AuthUser | null) => void;
+  setIsLoading: (isLoading: boolean) => void;
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
-  userId: null,
-  setUserId: (userId) => set({ userId }),
+  user: null,
+  isLoading: false,
+  setUser: (user) => set({ user }),
+  setIsLoading: (isLoading) => set({ isLoading }),
 }));
